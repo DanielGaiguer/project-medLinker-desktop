@@ -4,10 +4,14 @@
  */
 package model;
 
-/**
- *
- * @author gaigu
- */
 public class HospitalBean {
-    
+    private int id;
+        private String usuario;
+    private String nome;
+
+    private String senha;
+    private boolean admin;
+
+    public HospitalBean() {
+    }
 }
