@@ -13,14 +13,11 @@ import model.UsuarioDAO;
  * @author gaigu
  */
 public class Login extends javax.swing.JFrame {
-    Conexao conn = new Conexao();
-
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        conn.testConnection();
     }
 
     /**

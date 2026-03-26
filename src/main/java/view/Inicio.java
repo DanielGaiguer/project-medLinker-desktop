@@ -1,6 +1,10 @@
 package view;
 
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.PlantaoBean;
@@ -45,15 +49,25 @@ public class Inicio extends javax.swing.JFrame {
         
         PlantaoDAO dao = new PlantaoDAO();
         List<PlantaoBean> plantoes = dao.listarPlantoes();
+        
+       
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        
 
         for (PlantaoBean p: plantoes){
+           
+            Timestamp horaInicio = (Timestamp) p.getHora_inicio();
+            Timestamp horaFim = (Timestamp) p.getHora_fim();
+
+            
             Object[] linha = {
                 p.getHospital_id(),
                 p.getTitulo(),
                 p.getEspecialidade(),
-                p.getData_plantao(),
-                p.getHora_inicio(),
-                p.getHora_fim(),
+                p.getData_plantao(), //formatoData.format(dataPlantao),
+                formatoHora.format(horaInicio),
+                formatoHora.format(horaFim),
                 p.getValor(),
                 p.getStatus(),
             };
@@ -100,6 +114,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(250, 249, 251));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\gaigu\\Downloads\\Logo Medlinker3.png")); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(47, 128, 237));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -211,6 +226,8 @@ public class Inicio extends javax.swing.JFrame {
             TablePlantoes.getColumnModel().getColumn(5).setMinWidth(100);
             TablePlantoes.getColumnModel().getColumn(5).setPreferredWidth(100);
             TablePlantoes.getColumnModel().getColumn(5).setMaxWidth(100);
+            TablePlantoes.getColumnModel().getColumn(7).setMinWidth(80);
+            TablePlantoes.getColumnModel().getColumn(7).setPreferredWidth(80);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -219,8 +236,8 @@ public class Inicio extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(223, 223, 223))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

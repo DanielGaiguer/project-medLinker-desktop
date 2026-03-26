@@ -4,6 +4,12 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import model.HospitalBean;
+import model.HospitalDAO;
+import model.UsuarioBean;
+import model.UsuarioDAO;
+
 /**
  *
  * @author gaigu
@@ -212,23 +218,28 @@ public class CadastrarHospital extends javax.swing.JFrame {
                                             .addGap(18, 18, 18)
                                             .addComponent(ufTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(cidadeTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(80, 80, 80)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton3))
-                                        .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(80, 80, 80)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(71, 71, 71)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButton3))
+                                            .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(9, 9, 9))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,11 +265,13 @@ public class CadastrarHospital extends javax.swing.JFrame {
                     .addComponent(cidadeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(ufTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(ufTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3)))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(113, 113, 113))
@@ -317,35 +330,49 @@ public class CadastrarHospital extends javax.swing.JFrame {
     }//GEN-LAST:event_cidadeTxtFocusLost
 
     private void cidadeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadeTxtActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cidadeTxtActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        String currentNome = nomeTxt.getText().trim();
-//        String currentUser = cidadeTxt.getText().trim();
-//        String currentSenha = ufTxt.getText().trim();
+        String currentNome = nomeTxt.getText().trim();
+        String currentCidade = cidadeTxt.getText().trim();
+        String currentUf = ufTxt.getText().trim();
+        String currentUsuario = usuarioTxt.getText().trim();
+        String currentSenha = senhaTxt.getText().trim();
 
-//        if (currentNome == "") {
-//            JOptionPane.showMessageDialog(null, "Campo Nome não pode ficar vazio.");
-//        }else if(currentUser == "") {
-//            JOptionPane.showMessageDialog(null, "Campo Usuário não pode ficar vazio.");
-//        }else if(currentSenha == ""){
-//            JOptionPane.showMessageDialog(null, "Campo Senha não pode ficar vazio.");
-//        }else {
-//            UsuarioDAO dao = new UsuarioDAO();
-//            UsuarioBean userBean = new UsuarioBean();
-//            userBean.setNome(currentNome);
-//            userBean.setUsuario(currentUser);
-//            userBean.setSenha(currentSenha);
-//
-//            dao.cadastar(userBean);
-//            JOptionPane.showMessageDialog(null, "Usuario criado com sucesso.");
-//
-//            Login telaLogin = new Login();
-//
-//            telaLogin.setVisible(true);
-//            this.dispose();
-//        }
+        if (currentNome == "") {
+            JOptionPane.showMessageDialog(null, "Campo Nome não pode ficar vazio.");
+        }else if(currentCidade == "") {
+            JOptionPane.showMessageDialog(null, "Campo Cidade não pode ficar vazio.");
+        }else if(currentUf == ""){
+            JOptionPane.showMessageDialog(null, "Campo UF não pode ficar vazio.");
+        }else if(currentUsuario == ""){
+            JOptionPane.showMessageDialog(null, "Campo Usuário não pode ficar vazio.");
+        }else if(currentSenha == ""){
+            JOptionPane.showMessageDialog(null, "Campo Usuário não pode ficar vazio.");
+        }else {
+            //UsuarioDAO dao = new UsuarioDAO();
+            //UsuarioBean userBean = new UsuarioBean();
+            //userBean.setNome(currentNome);
+            //userBean.setUsuario(currentUsuario);
+            //userBean.setSenha(currentSenha);
+            HospitalDAO dao = new HospitalDAO();
+            HospitalBean hospitalBean = new HospitalBean();
+            
+            hospitalBean.setNome(currentNome);
+            hospitalBean.setCidade(currentCidade);
+            hospitalBean.setEstado(currentUf);
+            hospitalBean.setUsuario(currentUsuario);
+            hospitalBean.setSenha(currentSenha);
+
+            dao.cadastar(hospitalBean);
+            JOptionPane.showMessageDialog(null, "Hospital cadastrado com sucesso.");
+
+            Login telaLogin = new Login();
+
+            telaLogin.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nomeTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeTxtFocusGained
@@ -389,7 +416,7 @@ public class CadastrarHospital extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioTxtFocusLost
 
     private void usuarioTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTxtActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_usuarioTxtActionPerformed
 
     private void senhaTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaTxtFocusGained

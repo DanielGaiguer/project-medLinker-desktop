@@ -8,25 +8,17 @@ public class Conexao {
     private static final String USER = "root";
     private static final String PASSWORD = "Daniboy2@";
     
-    public static Connection conectar() {
+    private Conexao(){}
+    
+    public static synchronized Connection conectar() {
         Connection conn = null;
-        
-        try {
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-        }catch(SQLException e) {
+        try{
+            if(conn == null || conn.isClosed()){
+                conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            }
+        }catch( SQLException e){
             e.printStackTrace();
         }
         return conn;
-        
-    }
-    
-    public void testConnection () {
-        Connection conn = conectar();
-        if (conn == null) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar");
-        }
-//        }else {
-//            JOptionPane.showMessageDialog(null, "Conectado com sucesso");
-//        }
     }
 }
