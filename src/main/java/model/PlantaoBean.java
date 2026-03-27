@@ -21,8 +21,22 @@ public class PlantaoBean {
     private Timestamp hora_fim;
     private double valor;
     private String status;
-            
+
     public PlantaoBean() {
+    }
+
+
+    
+            
+    public PlantaoBean(int id, String titulo, String especialidade, LocalDate data_plantao, Timestamp hora_inicio, Timestamp hora_fim, double valor, String status) {
+        this.id = id;
+        this.titulo = titulo;
+        this.especialidade = especialidade;
+        this.data_plantao = data_plantao;
+        this.hora_inicio = hora_inicio;
+        this.hora_fim = hora_fim;
+        this.valor = valor;
+        this.status = status;
     }
 
 
