@@ -29,14 +29,14 @@ public class HospitalDAO {
             String usuarioId = null;
             
             while(rs.next()){
-                if(rs.getString("usuario_id") == null){
-                    JOptionPane.showMessageDialog(null, "Úsuario ou senha incorretos.");
+                if(rs.getString("id") == null){
+                    JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.");
                     return;
                 }
-                usuarioId = rs.getString("usuario_id");
+                usuarioId = rs.getString("id");
             }
             
-            stmt = conn.prepareStatement("INSERT INTO hospital (usuario_id, nome, cidade, estado) values (?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO hospitais (usuario_id, nome, cidade, estado) values (?, ?, ?, ?)");
             
             stmt.setString(1, usuarioId);
             stmt.setString(2, hospital.getNome());

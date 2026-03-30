@@ -11,6 +11,7 @@ import model.PlantaoBean;
 import model.PlantaoDAO;
 import model.UsuarioDAO;
 import view.Login;import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 /**
@@ -55,20 +56,32 @@ public class Inicio extends javax.swing.JFrame {
                     int id = (int) TablePlantoes.getValueAt(row, 0);
                     String hospital = (String) TablePlantoes.getValueAt(row, 1);
                     String especiialidade = (String) TablePlantoes.getValueAt(row, 2);
-                    String data = (String) TablePlantoes.getValueAt(row, 3);
-                    String inicio = (String) TablePlantoes.getValueAt(row, 4);
-                    String fim = (String) TablePlantoes.getValueAt(row, 5);
+
+                    LocalDate dateFormatted = (LocalDate) TablePlantoes.getValueAt(row, 3);
+                    String inicioStr = (String) TablePlantoes.getValueAt(row, 4);
+                    String fimStr = (String) TablePlantoes.getValueAt(row, 5);
+
+                    LocalTime inicio = LocalTime.parse(inicioStr);
+                    LocalTime fim = LocalTime.parse(fimStr);
+
                     Double valor = (Double) TablePlantoes.getValueAt(row, 6);
                     String status = (String) TablePlantoes.getValueAt(row, 7);
-                   
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate dateFormatted = LocalDate.parse(data, formatter);
-                    
-                    java.sql.Timestamp timestampInicio = java.sql.Timestamp.valueOf(inicio);
-                    java.sql.Timestamp timestampFim = java.sql.Timestamp.valueOf(fim);
-                
-                    PlantaoBean plantao = new PlantaoBean(id, hospital, especiialidade, dateFormatted, timestampInicio, timestampFim, valor, status);
-                    new PlantaoDetails(plantao).setVisible(true);
+
+                    Timestamp timestampInicio = Timestamp.valueOf(dateFormatted.atTime(inicio));
+                    Timestamp timestampFim = Timestamp.valueOf(dateFormatted.atTime(fim));
+
+                    PlantaoBean plantao = new PlantaoBean(
+                        id,
+                        hospital,
+                        especiialidade,
+                        dateFormatted,
+                        timestampInicio,
+                        timestampFim,
+                        valor,
+                        status
+                    );
+
+new PlantaoDetails(plantao).setVisible(true);
                    
                 }
             }
@@ -130,6 +143,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablePlantoes = new javax.swing.JTable();
@@ -143,8 +157,8 @@ public class Inicio extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(250, 249, 251));
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel3.setForeground(new java.awt.Color(47, 128, 237));
+        jPanel3.setBackground(new java.awt.Color(153, 255, 153));
+        jPanel3.setForeground(new java.awt.Color(0, 255, 0));
 
         jLabel3.setBackground(new java.awt.Color(250, 249, 251));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -166,7 +180,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(47, 128, 237));
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Cadastrar Hospital");
@@ -177,6 +191,11 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setText("Cadastrar Plantão");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -184,9 +203,11 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(425, 425, 425)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
@@ -195,10 +216,15 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -241,22 +267,11 @@ public class Inicio extends javax.swing.JFrame {
             TablePlantoes.getColumnModel().getColumn(0).setMinWidth(0);
             TablePlantoes.getColumnModel().getColumn(0).setPreferredWidth(0);
             TablePlantoes.getColumnModel().getColumn(0).setMaxWidth(0);
-            TablePlantoes.getColumnModel().getColumn(1).setMinWidth(200);
             TablePlantoes.getColumnModel().getColumn(1).setPreferredWidth(200);
-            TablePlantoes.getColumnModel().getColumn(1).setMaxWidth(200);
-            TablePlantoes.getColumnModel().getColumn(2).setMinWidth(200);
             TablePlantoes.getColumnModel().getColumn(2).setPreferredWidth(200);
-            TablePlantoes.getColumnModel().getColumn(2).setMaxWidth(200);
-            TablePlantoes.getColumnModel().getColumn(3).setMinWidth(100);
             TablePlantoes.getColumnModel().getColumn(3).setPreferredWidth(100);
-            TablePlantoes.getColumnModel().getColumn(3).setMaxWidth(100);
-            TablePlantoes.getColumnModel().getColumn(4).setMinWidth(100);
             TablePlantoes.getColumnModel().getColumn(4).setPreferredWidth(100);
-            TablePlantoes.getColumnModel().getColumn(4).setMaxWidth(100);
-            TablePlantoes.getColumnModel().getColumn(5).setMinWidth(100);
             TablePlantoes.getColumnModel().getColumn(5).setPreferredWidth(100);
-            TablePlantoes.getColumnModel().getColumn(5).setMaxWidth(100);
-            TablePlantoes.getColumnModel().getColumn(7).setMinWidth(80);
             TablePlantoes.getColumnModel().getColumn(7).setPreferredWidth(80);
         }
 
@@ -288,7 +303,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(281, 281, 281))
+                .addGap(280, 280, 280))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,9 +315,9 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -321,7 +336,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1320, 1320, 1320))
+                .addGap(233, 233, 233))
         );
 
         pack();
@@ -393,6 +408,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTable TablePlantoes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
