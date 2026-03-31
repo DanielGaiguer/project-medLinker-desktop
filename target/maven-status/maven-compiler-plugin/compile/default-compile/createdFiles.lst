@@ -55,9 +55,7 @@ model\PlantaoBean.class
 view\Cadastro$5.class
 view\NovoPlantaoDetalhes$1.class
 view\Inicio$5.class
-view\Cadastro$9.class
 view\CadastrarHospital$6.class
-view\Inicio$1.class
 model\HospitalDAO.class
 view\Login$3.class
 model\PlantaoDAO.class

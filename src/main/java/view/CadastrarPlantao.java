@@ -66,7 +66,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
                     
                     HospitalBean hospitalB = new HospitalBean(titulo);
                     new NovoPlantaoDetalhes(hospitalB).setVisible(true);
-                    dispose();
+                    //dispose();
                     }
                 }
             }
