@@ -121,6 +121,8 @@ public class PlantaoBean {
         this.valor = valor;
     }
     
-    
+    public java.util.Date getData_plantao_asDate() {
+        return java.sql.Date.valueOf(this.data_plantao); // se data_plantao for LocalDate
+    }
     
 }

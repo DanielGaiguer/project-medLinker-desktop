@@ -4,8 +4,13 @@
  */
 package view;
 
+import java.sql.Date;
 import model.HospitalBean;
 import model.HospitalDAO;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import model.PlantaoBean;
+import model.PlantaoDAO;
 
 /**
  *
@@ -13,14 +18,28 @@ import model.HospitalDAO;
  */
 public class NovoPlantaoDetalhes extends javax.swing.JFrame {
 
-    private HospitalBean hospital;
-    private HospitalDAO hospitalDAO;
+    private final HospitalBean hospital;
     /**
      * Creates new form NovoPlantaoDetalhes
+     * @param hospitalbean
      */
     public NovoPlantaoDetalhes(HospitalBean hospitalbean){
         this.hospital = hospitalbean;
         initComponents();
+
+        SpinnerDateModel dateModel = new SpinnerDateModel();
+        jSpinnerData.setModel(dateModel);
+        jSpinnerData.setEditor(new JSpinner.DateEditor(jSpinnerData, "dd/MM/yyyy"));
+
+
+        SpinnerDateModel inicioModel = new SpinnerDateModel();
+        jSpinnerInicio.setModel(inicioModel);
+        jSpinnerInicio.setEditor(new JSpinner.DateEditor(jSpinnerInicio, "HH:mm"));
+
+
+        SpinnerDateModel fimModel = new SpinnerDateModel();
+        jSpinnerFim.setModel(fimModel);
+        jSpinnerFim.setEditor(new JSpinner.DateEditor(jSpinnerFim, "HH:mm"));
         loadHospitalName();
     }
     
@@ -45,12 +64,12 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
-        dataTxt = new javax.swing.JTextField();
-        inicioTxt = new javax.swing.JTextField();
-        fimTxt = new javax.swing.JTextField();
         hifen = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jSpinnerData = new javax.swing.JSpinner();
+        jSpinnerFim = new javax.swing.JSpinner();
+        jSpinnerInicio = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         tituloTxt = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -63,7 +82,6 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setForeground(new java.awt.Color(0, 0, 0));
 
-        valorTxt.setEditable(false);
         valorTxt.setBackground(new java.awt.Color(255, 255, 255));
         valorTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         valorTxt.setForeground(new java.awt.Color(51, 51, 51));
@@ -170,36 +188,6 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
             }
         });
 
-        dataTxt.setBackground(new java.awt.Color(255, 255, 255));
-        dataTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dataTxt.setForeground(new java.awt.Color(51, 51, 51));
-        dataTxt.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        dataTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataTxtActionPerformed(evt);
-            }
-        });
-
-        inicioTxt.setBackground(new java.awt.Color(255, 255, 255));
-        inicioTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        inicioTxt.setForeground(new java.awt.Color(51, 51, 51));
-        inicioTxt.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        inicioTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inicioTxtActionPerformed(evt);
-            }
-        });
-
-        fimTxt.setBackground(new java.awt.Color(255, 255, 255));
-        fimTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        fimTxt.setForeground(new java.awt.Color(51, 51, 51));
-        fimTxt.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        fimTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fimTxtActionPerformed(evt);
-            }
-        });
-
         hifen.setBackground(new java.awt.Color(204, 204, 204));
         hifen.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         hifen.setForeground(new java.awt.Color(51, 51, 51));
@@ -218,6 +206,12 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Fim:");
 
+        jSpinnerData.setModel(new javax.swing.SpinnerDateModel());
+
+        jSpinnerFim.setModel(new javax.swing.SpinnerDateModel());
+
+        jSpinnerInicio.setModel(new javax.swing.SpinnerDateModel());
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -225,39 +219,49 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dataTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                            .addComponent(inicioTxt))
-                        .addGap(12, 12, 12)
-                        .addComponent(hifen, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jSpinnerData, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(fimTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(150, 150, 150))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jSpinnerInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addComponent(hifen, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addComponent(jSpinnerFim, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
+                .addComponent(jSpinnerData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(inicioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fimTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hifen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hifen, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -396,11 +400,88 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
     }//GEN-LAST:event_valorTxtActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //try{
-            //String titulo = tituloTxt.getText();
-            //String preco = valorTxt.getText();
-          //  String data =
-        //}
+        try {
+
+        // ===== DATA E HORAS =====
+        java.util.Date selectedDate = (java.util.Date) jSpinnerData.getValue();
+        java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
+
+        java.util.Date selectedInicio = (java.util.Date) jSpinnerInicio.getValue();
+        java.sql.Timestamp tsInicio = new java.sql.Timestamp(selectedInicio.getTime());
+
+        java.util.Date selectedFim = (java.util.Date) jSpinnerFim.getValue();
+        java.sql.Timestamp tsFim = new java.sql.Timestamp(selectedFim.getTime());
+
+
+        // ===== PEGAR TEXTFIELDS =====
+        String titulo = tituloTxt.getText();
+        String especialidade = especialidadeTxt.getText();
+        String valorTexto = valorTxt.getText();
+        String status = "aberto";
+
+
+        // ===== VALIDAÇÃO DO PREÇO =====
+        double valor;
+
+        try {
+            valor = Double.parseDouble(valorTexto);
+        } catch (NumberFormatException e) {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "O valor precisa ser um número válido!",
+                "Erro",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+
+            return;
+        }
+
+        PlantaoBean plantao = new PlantaoBean();
+
+        plantao.setTitulo(titulo);
+        plantao.setEspecialidade(especialidade);
+        plantao.setValor(valor);
+        plantao.setStatus(status);
+
+        plantao.setData_plantao(sqlDate.toLocalDate());
+        plantao.setHora_inicio(tsInicio);
+        plantao.setHora_fim(tsFim);
+
+
+        System.out.println("Hospital ID enviado: " + this.hospital.getId());
+            PlantaoDAO dao = new PlantaoDAO();
+
+        boolean sucesso = dao.cadastrarPlantao(plantao, tituloTxt.getText());
+
+
+        // ===== RESULTADO =====
+        if (sucesso) {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Plantão cadastrado com sucesso!"
+            );
+
+        } else {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro ao cadastrar plantão."
+            );
+
+        }
+
+    } catch (Exception e) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Erro inesperado: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -411,18 +492,6 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void dataTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dataTxtActionPerformed
-
-    private void inicioTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inicioTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inicioTxtActionPerformed
-
-    private void fimTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fimTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fimTxtActionPerformed
 
     private void hifenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hifenActionPerformed
         // TODO add your handling code here:
@@ -461,11 +530,8 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField dataTxt;
     private javax.swing.JTextField especialidadeTxt;
-    private javax.swing.JTextField fimTxt;
     private javax.swing.JTextField hifen;
-    private javax.swing.JTextField inicioTxt;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -476,6 +542,9 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JSpinner jSpinnerData;
+    private javax.swing.JSpinner jSpinnerFim;
+    private javax.swing.JSpinner jSpinnerInicio;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
