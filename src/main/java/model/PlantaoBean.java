@@ -24,9 +24,6 @@ public class PlantaoBean {
 
     public PlantaoBean() {
     }
-
-
-    
             
     public PlantaoBean(int id, String titulo, String especialidade, LocalDate data_plantao, Timestamp hora_inicio, Timestamp hora_fim, double valor, String status) {
         this.id = id;

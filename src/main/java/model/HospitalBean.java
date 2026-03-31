@@ -18,6 +18,10 @@ public class HospitalBean {
 
     public HospitalBean() {
     }
+    
+    public HospitalBean(String nome){
+        this.nome = nome;
+    }
 
     public HospitalBean(int id, String usuario, String senha, String nome, String cidade, String estado, Timestamp createdAt) {
         this.id = id;

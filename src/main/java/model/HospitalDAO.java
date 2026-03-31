@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -49,5 +51,29 @@ public class HospitalDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public List<HospitalBean> listarHospitais(){
+        List<HospitalBean> listHospitais = new ArrayList();
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conn.prepareStatement("Select nome from hospitais");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                HospitalBean hospital = new HospitalBean();
+                
+                hospital.setNome(rs.getString("nome"));
+                
+                listHospitais.add(hospital);
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listHospitais;
     }
 }
