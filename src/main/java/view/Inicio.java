@@ -13,8 +13,10 @@ import model.UsuarioDAO;
 import view.Login;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import javax.swing.JOptionPane;
 import model.HospitalDAO;
 import model.PlantaoBean.StatusPlantao;
+import model.SessaoUsuario;
 
 
 /**
@@ -26,7 +28,6 @@ public class Inicio extends javax.swing.JFrame {
     
     HospitalDAO hospitalDAO = new HospitalDAO();
     DefaultTableModel model;
-    UsuarioDAO user = new UsuarioDAO();
     /**
      * Creates new form Inicio
      */
@@ -64,6 +65,16 @@ public class Inicio extends javax.swing.JFrame {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
             if (e.getClickCount() == 2) {
+                SessaoUsuario session = SessaoUsuario.getInstance();
+
+                if (!session.isLoggedIn()) {
+                    JOptionPane.showMessageDialog(null, "É necessário realizar login para prosseguir.");
+                    Login telaLogin = new Login();
+                    telaLogin.setVisible(true);
+                    dispose();
+                    return;
+                }
+                
                 int row = TablePlantoes.getSelectedRow();
 
                 if (row >= 0) {
@@ -95,9 +106,8 @@ public class Inicio extends javax.swing.JFrame {
                         status
                     );
 
-new PlantaoDetails(plantao).setVisible(true);
-dispose();
-                   
+                    new PlantaoDetails(plantao).setVisible(true);
+                    dispose();
                 }
             }
         }
@@ -113,7 +123,6 @@ dispose();
         
        
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
         
 
         for (PlantaoBean p: plantoes){
@@ -126,7 +135,7 @@ dispose();
                 p.getId(),
                 p.getTitulo(),
                 p.getEspecialidade(),
-                p.getData_plantao(), //formatoData.format(dataPlantao),
+                p.getData_plantao(),
                 formatoHora.format(horaInicio),
                 formatoHora.format(horaFim),
                 p.getValor(),

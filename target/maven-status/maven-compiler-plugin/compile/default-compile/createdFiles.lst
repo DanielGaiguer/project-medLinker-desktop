@@ -6,6 +6,7 @@ view\CadastrarHospital$7.class
 view\Login$2.class
 view\Inicio$7.class
 view\NovoPlantaoDetalhes$3.class
+model\SessaoUsuario.class
 view\CadastrarPlantao$4.class
 view\Inicio.class
 view\PlantaoDetails$10.class
