@@ -51,13 +51,17 @@ public class PlantaoDAO {
         return listPlantoes;
     }
     
-    public boolean cadastrarPlantao(PlantaoBean plantao, String hospital_name) {
+    public boolean cadastrarPlantao(PlantaoBean plantao) {
         
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            stmt = conn.prepareStatement("insert into plantoes (hospital_id, titulo, especialidade, data_plantao, hora_inicio, hora_fim, valor, status) "
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?)");
             
             // Configura os parâmetros
-            stmt.setInt(1, hospital_id);
+            stmt.setInt(1, plantao.getHospital_id());
             stmt.setString(2, plantao.getTitulo());
             stmt.setString(3, plantao.getEspecialidade());
             

@@ -19,12 +19,14 @@ import model.PlantaoDAO;
 public class NovoPlantaoDetalhes extends javax.swing.JFrame {
 
     private final HospitalBean hospital;
+    private HospitalDAO hospitalDAO;
     /**
      * Creates new form NovoPlantaoDetalhes
      * @param hospitalbean
      */
     public NovoPlantaoDetalhes(HospitalBean hospitalbean){
         this.hospital = hospitalbean;
+        hospitalDAO = new HospitalDAO();
         initComponents();
 
         SpinnerDateModel dateModel = new SpinnerDateModel();
@@ -452,7 +454,7 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         System.out.println("Hospital ID enviado: " + this.hospital.getId());
             PlantaoDAO dao = new PlantaoDAO();
 
-        boolean sucesso = dao.cadastrarPlantao(plantao, tituloTxt.getText());
+        boolean sucesso = dao.cadastrarPlantao(plantao);
 
 
         // ===== RESULTADO =====
@@ -461,8 +463,12 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(
                 this,
                 "Plantão cadastrado com sucesso!"
-            );
-
+                );
+            Inicio telaInicio = new Inicio();
+            
+            telaInicio.setVisible(true);
+            this.dispose();
+            
         } else {
 
             javax.swing.JOptionPane.showMessageDialog(
@@ -485,7 +491,8 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        CadastrarPlantao telaCadastro = new CadastrarPlantao(this.hospitalDAO);
+        telaCadastro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 

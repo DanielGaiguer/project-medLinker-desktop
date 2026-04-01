@@ -60,12 +60,13 @@ public class HospitalDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conn.prepareStatement("Select nome from hospitais");
+            stmt = conn.prepareStatement("Select id, nome from hospitais");
             rs = stmt.executeQuery();
             
             while(rs.next()){
                 HospitalBean hospital = new HospitalBean();
                 
+                hospital.setId(rs.getInt("id"));
                 hospital.setNome(rs.getString("nome"));
                 
                 listHospitais.add(hospital);

@@ -66,7 +66,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
                     
                     HospitalBean hospitalB = new HospitalBean(titulo);
                     new NovoPlantaoDetalhes(hospitalB).setVisible(true);
-                    //dispose();
+                    dispose();
                     }
                 }
             }
@@ -85,7 +85,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         hospitalTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -129,17 +129,17 @@ public class CadastrarPlantao extends javax.swing.JFrame {
 
         hospitalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Hospitais"
+                "id", "Hospitais"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -148,7 +148,10 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(hospitalTable);
         if (hospitalTable.getColumnModel().getColumnCount() > 0) {
-            hospitalTable.getColumnModel().getColumn(0).setResizable(false);
+            hospitalTable.getColumnModel().getColumn(0).setMinWidth(0);
+            hospitalTable.getColumnModel().getColumn(0).setPreferredWidth(0);
+            hospitalTable.getColumnModel().getColumn(0).setMaxWidth(0);
+            hospitalTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
