@@ -14,6 +14,7 @@ import view.Login;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import model.HospitalDAO;
+import model.PlantaoBean.StatusPlantao;
 
 
 /**
@@ -31,22 +32,32 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        initTable();
+        esconderColunaID();
         listarPlantoes();
         initTableClickListener();
     }
     
-//    private void initTable(){
-//        tableModel = new DefaultTableModel(
-//            new Object[]{"ID", "Nome", "CPF", "Status"}, 0
-//        ){
-//            @Override
-//            public boolean isCellEditable(int row, int column){
-//                return false;
-//            }
-//        };
-//       
-//        jTable.setModel(tableModel);
-//    }
+    private void esconderColunaID() {
+        TablePlantoes.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePlantoes.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePlantoes.getColumnModel().getColumn(0).setWidth(0);
+    }
+    
+    private void initTable(){
+        model = new DefaultTableModel(
+            new Object[]{
+                "id",
+                "Hospital",
+                "Especialidade",
+                "Data",
+                "Hora Inicio",
+                "Hora Fim",
+                "Valor",
+                "Status"
+            }, 0
+        );
+    }
    
     private void initTableClickListener() {
     TablePlantoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,7 +69,7 @@ public class Inicio extends javax.swing.JFrame {
                 if (row >= 0) {
                     int id = (int) TablePlantoes.getValueAt(row, 0);
                     String hospital = (String) TablePlantoes.getValueAt(row, 1);
-                    String especiialidade = (String) TablePlantoes.getValueAt(row, 2);
+                    String especialidade = (String) TablePlantoes.getValueAt(row, 2);
 
                     LocalDate dateFormatted = (LocalDate) TablePlantoes.getValueAt(row, 3);
                     String inicioStr = (String) TablePlantoes.getValueAt(row, 4);
@@ -68,7 +79,7 @@ public class Inicio extends javax.swing.JFrame {
                     LocalTime fim = LocalTime.parse(fimStr);
 
                     Double valor = (Double) TablePlantoes.getValueAt(row, 6);
-                    String status = (String) TablePlantoes.getValueAt(row, 7);
+                    StatusPlantao status = (StatusPlantao) TablePlantoes.getValueAt(row, 7);
 
                     Timestamp timestampInicio = Timestamp.valueOf(dateFormatted.atTime(inicio));
                     Timestamp timestampFim = Timestamp.valueOf(dateFormatted.atTime(fim));
@@ -76,7 +87,7 @@ public class Inicio extends javax.swing.JFrame {
                     PlantaoBean plantao = new PlantaoBean(
                         id,
                         hospital,
-                        especiialidade,
+                        especialidade,
                         dateFormatted,
                         timestampInicio,
                         timestampFim,
@@ -85,6 +96,7 @@ public class Inicio extends javax.swing.JFrame {
                     );
 
 new PlantaoDetails(plantao).setVisible(true);
+dispose();
                    
                 }
             }
@@ -95,8 +107,6 @@ new PlantaoDetails(plantao).setVisible(true);
     private void listarPlantoes(){
         model = (DefaultTableModel) TablePlantoes.getModel();
         model.setRowCount(0);
-        
-       
         
         PlantaoDAO dao = new PlantaoDAO();
         List<PlantaoBean> plantoes = dao.listarPlantoes();
@@ -113,7 +123,7 @@ new PlantaoDetails(plantao).setVisible(true);
 
             
             Object[] linha = {
-                p.getHospital_id(),
+                p.getId(),
                 p.getTitulo(),
                 p.getEspecialidade(),
                 p.getData_plantao(), //formatoData.format(dataPlantao),
@@ -272,9 +282,6 @@ new PlantaoDetails(plantao).setVisible(true);
         });
         jScrollPane2.setViewportView(TablePlantoes);
         if (TablePlantoes.getColumnModel().getColumnCount() > 0) {
-            TablePlantoes.getColumnModel().getColumn(0).setMinWidth(0);
-            TablePlantoes.getColumnModel().getColumn(0).setPreferredWidth(0);
-            TablePlantoes.getColumnModel().getColumn(0).setMaxWidth(0);
             TablePlantoes.getColumnModel().getColumn(1).setPreferredWidth(200);
             TablePlantoes.getColumnModel().getColumn(2).setPreferredWidth(200);
             TablePlantoes.getColumnModel().getColumn(3).setPreferredWidth(100);

@@ -28,6 +28,9 @@ public class PlantaoDAO {
             
             while(rs.next()){
                 PlantaoBean plantao = new PlantaoBean();
+                String statusBD = rs.getString("status");
+                PlantaoBean.StatusPlantao status =
+                        PlantaoBean.StatusPlantao.valueOf(statusBD);
                 
                 plantao.setId(rs.getInt("id"));
                 plantao.setHospital_id(rs.getInt("hospital_id"));
@@ -37,7 +40,7 @@ public class PlantaoDAO {
                 plantao.setHora_inicio(rs.getTimestamp("hora_inicio"));
                 plantao.setHora_fim(rs.getTimestamp("hora_fim"));
                 plantao.setValor(rs.getDouble("valor"));
-                plantao.setStatus(rs.getString("status"));
+                plantao.setStatus(status);
                 
                 
                 listPlantoes.add(plantao);
@@ -76,7 +79,7 @@ public class PlantaoDAO {
             stmt.setTime(6, new Time(utilHoraFim.getTime()));
             
             stmt.setDouble(7, plantao.getValor());
-            stmt.setString(8, plantao.getStatus());
+            stmt.setString(8, plantao.getStatus().name());
             
             // Executa o insert
             int linhasAfetadas = stmt.executeUpdate();
@@ -88,5 +91,21 @@ public class PlantaoDAO {
             e.printStackTrace();
             return false;
         } 
+    }
+    
+    public void toggleDeactive(int id){
+        String sql = "update plantoes set status = ? where id = ?";
+        
+        try(Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, PlantaoBean.StatusPlantao.preenchido.name());
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+            
+        } catch(Exception e){
+            throw new RuntimeException(e);
+        }        
     }
 }

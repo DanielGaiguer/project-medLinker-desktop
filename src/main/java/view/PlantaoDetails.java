@@ -4,7 +4,6 @@
  */
 package view;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import model.PlantaoBean;
@@ -52,7 +51,11 @@ private void loadPlantaoData() {
     dataTxt.setText(dateFormatted);
     inicioTxt.setText(inicioFormatted);
     fimTxt.setText(fimFormatted);
-    statusTxt.setText(plantaobean.getStatus());
+    statusTxt.setText(plantaobean.getStatus().name());
+    
+    boolean isActive = plantaobean.getStatus() == PlantaoBean.StatusPlantao.aberto;
+    
+    candidatarButton.setEnabled(isActive);
 }
     
 
@@ -89,7 +92,7 @@ private void loadPlantaoData() {
         jPanel5 = new javax.swing.JPanel();
         jTextField4 = new javax.swing.JTextField();
         statusTxt = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        candidatarButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
@@ -169,7 +172,7 @@ private void loadPlantaoData() {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valorTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(valorTxt)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -351,7 +354,7 @@ private void loadPlantaoData() {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(statusTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(328, 328, 328))
+                .addGap(320, 320, 320))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,11 +365,11 @@ private void loadPlantaoData() {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jButton2.setBackground(new java.awt.Color(47, 128, 237));
-        jButton2.setText("Candidatar-se");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        candidatarButton.setBackground(new java.awt.Color(47, 128, 237));
+        candidatarButton.setText("Candidatar-se");
+        candidatarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                candidatarButtonActionPerformed(evt);
             }
         });
 
@@ -385,12 +388,12 @@ private void loadPlantaoData() {
                 .addGap(30, 30, 30)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addComponent(candidatarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 467, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -412,16 +415,17 @@ private void loadPlantaoData() {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(candidatarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
@@ -457,18 +461,28 @@ private void loadPlantaoData() {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
         this.dispose();
+        
+        Inicio telaInicio = new Inicio();
+        telaInicio.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void valorTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_valorTxtActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void candidatarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_candidatarButtonActionPerformed
+        conexao.toggleDeactive(plantaobean.getId());
+        plantaobean.setStatus(PlantaoBean.StatusPlantao.preenchido);
+        loadPlantaoData();
+        
+        
         JOptionPane.showMessageDialog(null, "Candidatado para plantão com sucesso.");
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        Inicio telaInicio = new Inicio();
+        telaInicio.setVisible(true);
+    }//GEN-LAST:event_candidatarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -506,12 +520,12 @@ private void loadPlantaoData() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton candidatarButton;
     private javax.swing.JTextField dataTxt;
     private javax.swing.JTextField especialidadeTxt;
     private javax.swing.JTextField fimTxt;
     private javax.swing.JTextField hifen;
     private javax.swing.JTextField inicioTxt;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

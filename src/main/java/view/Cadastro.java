@@ -34,12 +34,12 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        senhaTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         usuarioTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         nomeTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        senhaTxt = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,23 +83,6 @@ public class Cadastro extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-
-        senhaTxt.setBackground(new java.awt.Color(255, 255, 255));
-        senhaTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        senhaTxt.setText("Senha");
-        senhaTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                senhaTxtFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                senhaTxtFocusLost(evt);
-            }
-        });
-        senhaTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senhaTxtActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -152,17 +135,27 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Digite o seu nome");
 
+        senhaTxt.setBackground(new java.awt.Color(255, 255, 255));
+        senhaTxt.setForeground(new java.awt.Color(0, 0, 0));
+        senhaTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                senhaTxtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(senhaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(nomeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)
@@ -171,7 +164,10 @@ public class Cadastro extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(202, Short.MAX_VALUE)
+                .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -184,9 +180,7 @@ public class Cadastro extends javax.swing.JFrame {
                     .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel3)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(66, Short.MAX_VALUE)))
         );
 
         jButton1.setBackground(new java.awt.Color(47, 128, 237));
@@ -218,7 +212,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
@@ -226,10 +220,6 @@ public class Cadastro extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void senhaTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_senhaTxtActionPerformed
 
     private void usuarioTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTxtActionPerformed
         // TODO add your handling code here:
@@ -246,6 +236,10 @@ public class Cadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo Usuário não pode ficar vazio.");
         }else if(currentSenha == ""){
             JOptionPane.showMessageDialog(null, "Campo Senha não pode ficar vazio.");
+        }else if(currentUser.length() < 8) {
+            JOptionPane.showMessageDialog(null, "Campo Usuário não pode ter menos que 8 caracteres.");
+        }else if(currentSenha.length() < 8){
+            JOptionPane.showMessageDialog(null, "Campo Senha não pode ter menos que 8 caracteres.");
         }else {
             UsuarioDAO dao = new UsuarioDAO();
             UsuarioBean userBean = new UsuarioBean();
@@ -288,20 +282,6 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_usuarioTxtFocusGained
 
-    private void senhaTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaTxtFocusGained
-        String currentSenha = senhaTxt.getText().trim();
-        if ("Senha".equals(currentSenha)){
-            senhaTxt.setText("");
-        }
-    }//GEN-LAST:event_senhaTxtFocusGained
-
-    private void senhaTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_senhaTxtFocusLost
-        String currentSenha = senhaTxt.getText().trim();
-        if ("".equals(currentSenha)){
-            senhaTxt.setText("Senha");
-        }
-    }//GEN-LAST:event_senhaTxtFocusLost
-
     private void usuarioTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usuarioTxtFocusLost
         String currentUsuario = usuarioTxt.getText().trim();
         if ("".equals(currentUsuario)){
@@ -319,6 +299,10 @@ public class Cadastro extends javax.swing.JFrame {
     private void usuarioTxtComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_usuarioTxtComponentRemoved
         // TODO add your handling code here:
     }//GEN-LAST:event_usuarioTxtComponentRemoved
+
+    private void senhaTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_senhaTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,7 +349,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField nomeTxt;
-    private javax.swing.JTextField senhaTxt;
+    private javax.swing.JPasswordField senhaTxt;
     private javax.swing.JTextField usuarioTxt;
     // End of variables declaration//GEN-END:variables
 }

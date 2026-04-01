@@ -20,13 +20,11 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
 
     private final HospitalBean hospital;
     private HospitalDAO hospitalDAO;
-    /**
-     * Creates new form NovoPlantaoDetalhes
-     * @param hospitalbean
-     */
+    
     public NovoPlantaoDetalhes(HospitalBean hospitalbean){
         this.hospital = hospitalbean;
         hospitalDAO = new HospitalDAO();
+
         initComponents();
 
         SpinnerDateModel dateModel = new SpinnerDateModel();
@@ -402,8 +400,7 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
     }//GEN-LAST:event_valorTxtActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-
+        try {    
         // ===== DATA E HORAS =====
         java.util.Date selectedDate = (java.util.Date) jSpinnerData.getValue();
         java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
@@ -419,8 +416,6 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         String titulo = tituloTxt.getText();
         String especialidade = especialidadeTxt.getText();
         String valorTexto = valorTxt.getText();
-        String status = "aberto";
-
 
         // ===== VALIDAÇÃO DO PREÇO =====
         double valor;
@@ -444,7 +439,7 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         plantao.setTitulo(titulo);
         plantao.setEspecialidade(especialidade);
         plantao.setValor(valor);
-        plantao.setStatus(status);
+        plantao.setStatus(PlantaoBean.StatusPlantao.aberto);
 
         plantao.setData_plantao(sqlDate.toLocalDate());
         plantao.setHora_inicio(tsInicio);

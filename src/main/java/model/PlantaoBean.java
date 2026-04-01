@@ -20,12 +20,12 @@ public class PlantaoBean {
     private Timestamp hora_inicio;
     private Timestamp hora_fim;
     private double valor;
-    private String status;
+    private StatusPlantao status;
 
     public PlantaoBean() {
     }
             
-    public PlantaoBean(int id, String titulo, String especialidade, LocalDate data_plantao, Timestamp hora_inicio, Timestamp hora_fim, double valor, String status) {
+    public PlantaoBean(int id, String titulo, String especialidade, LocalDate data_plantao, Timestamp hora_inicio, Timestamp hora_fim, double valor, StatusPlantao status) {
         this.id = id;
         this.titulo = titulo;
         this.especialidade = especialidade;
@@ -37,7 +37,7 @@ public class PlantaoBean {
     }
 
 
-    public PlantaoBean(int id, int hospital_id, String titulo, String especialidade, LocalDate data_plantao, Timestamp hora_inicio, Timestamp hora_fim, double valor, String status) {
+    public PlantaoBean(int id, int hospital_id, String titulo, String especialidade, LocalDate data_plantao, Timestamp hora_inicio, Timestamp hora_fim, double valor, StatusPlantao status) {
         this.id = id;
         this.hospital_id = hospital_id;
         this.titulo = titulo;
@@ -46,6 +46,20 @@ public class PlantaoBean {
         this.hora_inicio = hora_inicio;
         this.hora_fim = hora_fim;
         this.valor = valor;
+        this.status = status;
+    }
+    
+    
+    public enum StatusPlantao {
+        aberto,
+        preenchido
+    }
+    
+    public StatusPlantao getStatus(){
+        return status;
+    }
+    
+    public void setStatus(StatusPlantao status){
         this.status = status;
     }
 
@@ -59,14 +73,6 @@ public class PlantaoBean {
 
     public int getHospital_id() {
         return hospital_id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public void setHospital_id(int hospital_id) {
