@@ -78,6 +78,7 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Plantão");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -401,7 +402,6 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {    
-        // ===== DATA E HORAS =====
         java.util.Date selectedDate = (java.util.Date) jSpinnerData.getValue();
         java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 
@@ -437,6 +437,7 @@ public class NovoPlantaoDetalhes extends javax.swing.JFrame {
         PlantaoBean plantao = new PlantaoBean();
 
         plantao.setTitulo(titulo);
+        plantao.setHospital_id(hospital.getId());
         plantao.setEspecialidade(especialidade);
         plantao.setValor(valor);
         plantao.setStatus(PlantaoBean.StatusPlantao.aberto);

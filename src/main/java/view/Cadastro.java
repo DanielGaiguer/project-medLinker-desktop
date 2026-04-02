@@ -43,6 +43,7 @@ public class Cadastro extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro");
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 

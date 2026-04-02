@@ -3,13 +3,10 @@ package view;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.PlantaoBean;
 import model.PlantaoDAO;
-import model.UsuarioDAO;
 import view.Login;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -41,18 +38,26 @@ public class Inicio extends javax.swing.JFrame {
         if (!session.isLoggedIn()){
             sairButton.setVisible(false);
         }
+        if (session.isLoggedIn()){
+            loginButton.setVisible(false);
+        }
+        TablePlantoes.getTableHeader().setReorderingAllowed(false);
     }
     
     private void esconderColunaID() {
         TablePlantoes.getColumnModel().getColumn(0).setMinWidth(0);
         TablePlantoes.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePlantoes.getColumnModel().getColumn(0).setWidth(0);
+        TablePlantoes.getColumnModel().getColumn(1).setMinWidth(0);
+        TablePlantoes.getColumnModel().getColumn(1).setMaxWidth(0);
+        TablePlantoes.getColumnModel().getColumn(1).setWidth(0);
     }
     
     private void initTable(){
         model = new DefaultTableModel(
             new Object[]{
                 "id",
+                "hospital_id",
                 "Hospital",
                 "Especialidade",
                 "Data",
@@ -166,7 +171,7 @@ public class Inicio extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         sairButton = new javax.swing.JButton();
@@ -177,6 +182,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Início");
 
         jPanel1.setBackground(new java.awt.Color(249, 250, 251));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -195,14 +201,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(47, 128, 237));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Fazer Login");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setBackground(new java.awt.Color(47, 128, 237));
+        loginButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loginButton.setForeground(new java.awt.Color(0, 0, 0));
+        loginButton.setText("Fazer Login");
+        loginButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
 
@@ -230,7 +236,7 @@ public class Inicio extends javax.swing.JFrame {
         sairButton.setBackground(new java.awt.Color(255, 255, 255));
         sairButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         sairButton.setForeground(new java.awt.Color(0, 0, 0));
-        sairButton.setText("Sair");
+        sairButton.setText("Sair da conta");
         sairButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         sairButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -250,14 +256,14 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(425, 425, 425)
+                .addGap(419, 419, 419)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
         jPanel3Layout.setVerticalGroup(
@@ -265,17 +271,12 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -315,11 +316,20 @@ public class Inicio extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(TablePlantoes);
         if (TablePlantoes.getColumnModel().getColumnCount() > 0) {
+            TablePlantoes.getColumnModel().getColumn(0).setResizable(false);
+            TablePlantoes.getColumnModel().getColumn(0).setPreferredWidth(0);
+            TablePlantoes.getColumnModel().getColumn(1).setResizable(false);
             TablePlantoes.getColumnModel().getColumn(1).setPreferredWidth(200);
+            TablePlantoes.getColumnModel().getColumn(2).setResizable(false);
             TablePlantoes.getColumnModel().getColumn(2).setPreferredWidth(200);
+            TablePlantoes.getColumnModel().getColumn(3).setResizable(false);
             TablePlantoes.getColumnModel().getColumn(3).setPreferredWidth(100);
+            TablePlantoes.getColumnModel().getColumn(4).setResizable(false);
             TablePlantoes.getColumnModel().getColumn(4).setPreferredWidth(100);
+            TablePlantoes.getColumnModel().getColumn(5).setResizable(false);
             TablePlantoes.getColumnModel().getColumn(5).setPreferredWidth(100);
+            TablePlantoes.getColumnModel().getColumn(6).setResizable(false);
+            TablePlantoes.getColumnModel().getColumn(7).setResizable(false);
             TablePlantoes.getColumnModel().getColumn(7).setPreferredWidth(80);
         }
 
@@ -407,12 +417,12 @@ public class Inicio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         Login telaLogin = new Login();
 
         telaLogin.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         Inicio telaInicio = new Inicio();
@@ -437,6 +447,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void sairButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairButtonActionPerformed
         JanelaSair janelaSair = new JanelaSair();
+        this.dispose();
         janelaSair.setVisible(true);
     }//GEN-LAST:event_sairButtonActionPerformed
 
@@ -487,7 +498,6 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablePlantoes;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -498,6 +508,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton loginButton;
     private javax.swing.JButton sairButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,6 @@
 package conexao;
 
 import java.sql.*;
-import javax.swing.JOptionPane;
 
 public class Conexao {
     private static final String URL = "jdbc:mysql://localhost:3306/medlinker";

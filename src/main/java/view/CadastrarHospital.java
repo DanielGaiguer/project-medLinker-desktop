@@ -52,6 +52,7 @@ public class CadastrarHospital extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Hospital");
         setBackground(new java.awt.Color(250, 249, 251));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
@@ -390,11 +391,7 @@ public class CadastrarHospital extends javax.swing.JFrame {
         }else if(currentSenha == ""){
             JOptionPane.showMessageDialog(null, "Campo Usuário não pode ficar vazio.");
         }else {
-            //UsuarioDAO dao = new UsuarioDAO();
-            //UsuarioBean userBean = new UsuarioBean();
-            //userBean.setNome(currentNome);
-            //userBean.setUsuario(currentUsuario);
-            //userBean.setSenha(currentSenha);
+
             HospitalDAO dao = new HospitalDAO();
             HospitalBean hospitalBean = new HospitalBean();
             
@@ -407,9 +404,9 @@ public class CadastrarHospital extends javax.swing.JFrame {
             dao.cadastar(hospitalBean);
             JOptionPane.showMessageDialog(null, "Hospital cadastrado com sucesso.");
 
-            Login telaLogin = new Login();
+            //Login telaLogin = new Login();
 
-            telaLogin.setVisible(true);
+            //telaLogin.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

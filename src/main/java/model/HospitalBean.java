@@ -19,8 +19,9 @@ public class HospitalBean {
     public HospitalBean() {
     }
     
-    public HospitalBean(String nome){
+    public HospitalBean(String nome, int id){
         this.nome = nome;
+        this.id = id;
     }
 
     public HospitalBean(int id, String usuario, String senha, String nome, String cidade, String estado, Timestamp createdAt) {

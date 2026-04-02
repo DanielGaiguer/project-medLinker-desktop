@@ -13,6 +13,7 @@ view\PlantaoDetails$10.class
 conexao\Conexao.class
 view\NovoPlantaoDetalhes$6.class
 view\NovoPlantaoDetalhes.class
+view\JanelaSair$5.class
 model\UsuarioDAO.class
 view\CadastrarHospital$13.class
 view\CadastrarHospital$4.class

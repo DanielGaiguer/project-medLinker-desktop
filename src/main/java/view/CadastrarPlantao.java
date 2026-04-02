@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.HospitalBean;
 import model.HospitalDAO;
-import model.PlantaoBean;
 
 /**
  *
@@ -31,7 +30,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
 
     private void initTable(){
         tableModel = new DefaultTableModel(
-            new Object[]{"Nome"}, 0
+            new Object[]{"id", "Nome"}, 0
         ){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -49,7 +48,8 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         
         for (HospitalBean h : hospitais){
             tableModel.addRow(new Object[]{
-                h.getNome()
+                h.getId(),
+                h.getNome(),
             });
         }
     }
@@ -62,9 +62,10 @@ public class CadastrarPlantao extends javax.swing.JFrame {
                 int row = hospitalTable.getSelectedRow();
 
                 if (row >= 0) {
-                    String titulo = (String) tableModel.getValueAt(row, 0);
+                    int id = (int) tableModel.getValueAt(row, 0);
+                    String titulo = (String) tableModel.getValueAt(row, 1);
                     
-                    HospitalBean hospitalB = new HospitalBean(titulo);
+                    HospitalBean hospitalB = new HospitalBean(titulo, id);
                     new NovoPlantaoDetalhes(hospitalB).setVisible(true);
                     dispose();
                     }
@@ -86,6 +87,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Plantão");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -111,7 +113,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +141,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -178,17 +180,15 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(178, 178, 178))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
