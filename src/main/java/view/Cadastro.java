@@ -238,7 +238,7 @@ public class Cadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo Senha não pode ficar vazio.");
         }else if(currentUser.length() < 8) {
             JOptionPane.showMessageDialog(null, "Campo Usuário não pode ter menos que 8 caracteres.");
-        }else if(currentSenha.length() < 8){
+        }else if(currentSenha.length() < 5){
             JOptionPane.showMessageDialog(null, "Campo Senha não pode ter menos que 8 caracteres.");
         }else {
             UsuarioDAO dao = new UsuarioDAO();

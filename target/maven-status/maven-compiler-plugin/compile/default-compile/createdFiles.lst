@@ -18,7 +18,9 @@ view\CadastrarHospital$13.class
 view\CadastrarHospital$4.class
 view\CadastrarPlantao$1.class
 view\PlantaoDetails$5.class
+view\JanelaSair.class
 view\Inicio$3.class
+view\JanelaSair$2.class
 view\Login$1.class
 view\NovoPlantaoDetalhes$2.class
 view\PlantaoDetails$8.class
@@ -31,6 +33,7 @@ view\Inicio$6.class
 view\Login$5.class
 view\NovoPlantaoDetalhes$5.class
 view\Cadastro$1.class
+view\Inicio$9.class
 view\Cadastro$4.class
 view\CadastrarHospital$8.class
 view\PlantaoDetails$1.class
@@ -43,6 +46,7 @@ view\Cadastro$8.class
 view\PlantaoDetails$4.class
 view\CadastrarHospital$11.class
 view\CadastrarHospital$2.class
+view\JanelaSair$3.class
 view\PlantaoDetails$7.class
 view\PlantaoDetails$11.class
 view\CadastrarHospital$9.class
@@ -56,9 +60,11 @@ view\Cadastro$9.class
 view\CadastrarHospital$6.class
 view\Inicio$1.class
 model\HospitalDAO.class
+view\JanelaSair$4.class
 view\Login$3.class
 model\PlantaoDAO.class
 view\CadastrarHospital$10.class
+view\Inicio$8.class
 view\NovoPlantaoDetalhes$4.class
 view\CadastrarHospital.class
 view\CadastrarPlantao.class
@@ -69,6 +75,7 @@ view\PlantaoDetails$3.class
 view\Cadastro$6.class
 view\Login.class
 view\NovoPlantaoDetalhes$7.class
+view\JanelaSair$1.class
 view\Inicio$4.class
 view\PlantaoDetails$6.class
 view\CadastrarHospital$3.class

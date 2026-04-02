@@ -25,9 +25,10 @@ import model.SessaoUsuario;
  */
 
 public class Inicio extends javax.swing.JFrame {
-    
+    SessaoUsuario session = SessaoUsuario.getInstance();
     HospitalDAO hospitalDAO = new HospitalDAO();
     DefaultTableModel model;
+
     /**
      * Creates new form Inicio
      */
@@ -37,6 +38,9 @@ public class Inicio extends javax.swing.JFrame {
         esconderColunaID();
         listarPlantoes();
         initTableClickListener();
+        if (!session.isLoggedIn()){
+            sairButton.setVisible(false);
+        }
     }
     
     private void esconderColunaID() {
@@ -65,7 +69,6 @@ public class Inicio extends javax.swing.JFrame {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
             if (e.getClickCount() == 2) {
-                SessaoUsuario session = SessaoUsuario.getInstance();
 
                 if (!session.isLoggedIn()) {
                     JOptionPane.showMessageDialog(null, "É necessário realizar login para prosseguir.");
@@ -166,6 +169,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        sairButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablePlantoes = new javax.swing.JTable();
@@ -223,6 +227,22 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        sairButton.setBackground(new java.awt.Color(255, 255, 255));
+        sairButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        sairButton.setForeground(new java.awt.Color(0, 0, 0));
+        sairButton.setText("Sair");
+        sairButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        sairButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sairButtonMouseClicked(evt);
+            }
+        });
+        sairButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -235,6 +255,8 @@ public class Inicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
@@ -245,13 +267,15 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))))
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -367,6 +391,16 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+
+        if (!session.isLoggedIn()) {
+            JOptionPane.showMessageDialog(null, "É necessário realizar login para prosseguir.");
+            Login telaLogin = new Login();
+            telaLogin.setVisible(true);
+            dispose();
+            return;
+        }
+                
         CadastrarHospital telaCadastroHospital = new CadastrarHospital();
 
         telaCadastroHospital.setVisible(true);
@@ -387,10 +421,28 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        if (!session.isLoggedIn()) {
+            JOptionPane.showMessageDialog(null, "É necessário realizar login para prosseguir.");
+            Login telaLogin = new Login();
+            telaLogin.setVisible(true);
+            dispose();
+            return;
+        }
+        
         CadastrarPlantao telaPlantao = new CadastrarPlantao(hospitalDAO);
         telaPlantao.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void sairButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairButtonActionPerformed
+        JanelaSair janelaSair = new JanelaSair();
+        janelaSair.setVisible(true);
+    }//GEN-LAST:event_sairButtonActionPerformed
+
+    private void sairButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairButtonMouseClicked
+        
+    }//GEN-LAST:event_sairButtonMouseClicked
 
     
     /**
@@ -446,5 +498,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton sairButton;
     // End of variables declaration//GEN-END:variables
 }

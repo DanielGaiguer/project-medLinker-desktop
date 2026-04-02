@@ -11,6 +11,10 @@ public class SessaoUsuario {
         return instancia; 
     }
     
+    public String getNome() {
+        return usuarioLogado.getNome();
+    }
+    
     public void login(UsuarioBean usuario) {
         this.usuarioLogado = usuario;
         System.out.println(usuario.getUsuario()+ " logado com sucesso!");

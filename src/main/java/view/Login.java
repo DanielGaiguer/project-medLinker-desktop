@@ -5,6 +5,7 @@
 package view;
 import conexao.Conexao;
 import javax.swing.JOptionPane;
+import model.SessaoUsuario;
 import model.UsuarioBean;
 import model.UsuarioDAO;
 
@@ -226,15 +227,25 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo Usuário não pode ficar vazio.");
         }else if("".equals(currentSenha)){
             JOptionPane.showMessageDialog(null, "Campo Senha não pode ficar vazio.");
+        }else if(currentUser.length() < 8) {
+            JOptionPane.showMessageDialog(null, "Campo Usuário não pode menos que 8 caracteres.");
+        }else if(currentSenha.length() < 5){
+            JOptionPane.showMessageDialog(null, "Campo Senha não pode menos que 8 caracteres.");
         }else {
             UsuarioDAO dao = new UsuarioDAO();
             UsuarioBean usuarioLogado = dao.logar(currentUser, currentSenha);
                     if (usuarioLogado.getId() == 0) {
                         JOptionPane.showMessageDialog(null, "Erro ao realizar login, verifique usuário e senha e tente novamente.");
                     }else {
+                        SessaoUsuario session = SessaoUsuario.getInstance();
+                        if (session.isLoggedIn()) {
+                            JOptionPane.showMessageDialog(null, "Você já está logado, saia da sua conta atual para continuar.");
+                            return;
+                        }
+                        session.login(usuarioLogado);
                         JOptionPane.showMessageDialog(null, "Usuário " + usuarioLogado.getNome() + " logado com sucesso.");
                         Inicio telaInicio = new Inicio();
-
+                        
                         telaInicio.setVisible(true);
                         this.dispose();
                     }
