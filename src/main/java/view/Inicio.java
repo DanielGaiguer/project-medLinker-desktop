@@ -25,9 +25,6 @@ public class Inicio extends javax.swing.JFrame {
     HospitalDAO hospitalDAO = new HospitalDAO();
     DefaultTableModel model;
 
-    /**
-     * Creates new form Inicio
-     */
     public Inicio() {
         initComponents();
         initTable();
@@ -36,6 +33,7 @@ public class Inicio extends javax.swing.JFrame {
         initTableClickListener();
         if (!session.isLoggedIn()){
             sairButton.setVisible(false);
+            meusPlantoes.setVisible(false);
         }
         if (session.isLoggedIn()){
             loginButton.setVisible(false);
@@ -179,6 +177,7 @@ public class Inicio extends javax.swing.JFrame {
         TablePlantoes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        meusPlantoes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Início");
@@ -255,7 +254,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(419, 419, 419)
+                .addGap(410, 410, 410)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,16 +340,26 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 153, 0));
         jLabel2.setText("Linker");
 
+        meusPlantoes.setBackground(new java.awt.Color(255, 255, 255));
+        meusPlantoes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        meusPlantoes.setForeground(new java.awt.Color(0, 0, 0));
+        meusPlantoes.setText("Meus plantões");
+        meusPlantoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        meusPlantoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meusPlantoesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -358,9 +367,12 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1506, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(meusPlantoes, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1087, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(213, 213, 213))
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,9 +384,11 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(meusPlantoes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -400,7 +414,6 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
 
         if (!session.isLoggedIn()) {
             JOptionPane.showMessageDialog(null, "É necessário realizar login para prosseguir.");
@@ -453,6 +466,11 @@ public class Inicio extends javax.swing.JFrame {
     private void sairButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairButtonMouseClicked
         
     }//GEN-LAST:event_sairButtonMouseClicked
+
+    private void meusPlantoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meusPlantoesActionPerformed
+        MeusPlantoes telaMeusPlantoes = new MeusPlantoes();
+        telaMeusPlantoes.setVisible(true);
+    }//GEN-LAST:event_meusPlantoesActionPerformed
 
     
     /**
@@ -508,6 +526,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton loginButton;
+    private javax.swing.JButton meusPlantoes;
     private javax.swing.JButton sairButton;
     // End of variables declaration//GEN-END:variables
 }

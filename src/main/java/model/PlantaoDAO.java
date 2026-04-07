@@ -124,4 +124,52 @@ public class PlantaoDAO {
             throw new RuntimeException(e);
         }        
     }
+    
+        public List<PlantaoBean> listarPlantoesReservados(int idUsuario) {
+    List<PlantaoBean> listPlantoes = new ArrayList<>();
+
+    try {
+        Connection conn = Conexao.conectar();
+
+        String sql = """
+            SELECT p.*
+            FROM plantoes_reservados pr
+            JOIN plantoes p ON p.id = pr.plantao_id
+            WHERE pr.usuario_id = ?
+        """;
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, idUsuario);
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+
+            PlantaoBean plantao = new PlantaoBean();
+
+            String statusBD = rs.getString("status");
+            PlantaoBean.StatusPlantao status =
+                    PlantaoBean.StatusPlantao.valueOf(statusBD);
+
+            plantao.setId(rs.getInt("id"));
+            plantao.setHospital_id(rs.getInt("hospital_id"));
+            plantao.setTitulo(rs.getString("titulo"));
+            plantao.setEspecialidade(rs.getString("especialidade"));
+            plantao.setData_plantao(rs.getDate("data_plantao").toLocalDate());
+
+            plantao.setHora_inicio(rs.getTimestamp("hora_inicio"));
+            plantao.setHora_fim(rs.getTimestamp("hora_fim"));
+
+            plantao.setValor(rs.getDouble("valor"));
+            plantao.setStatus(status);
+
+            listPlantoes.add(plantao);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return listPlantoes;
+}
 }
