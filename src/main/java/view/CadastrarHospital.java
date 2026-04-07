@@ -404,9 +404,9 @@ public class CadastrarHospital extends javax.swing.JFrame {
             dao.cadastar(hospitalBean);
             JOptionPane.showMessageDialog(null, "Hospital cadastrado com sucesso.");
 
-            //Login telaLogin = new Login();
+            Inicio telaInicio = new Inicio();
 
-            //telaLogin.setVisible(true);
+            telaInicio.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

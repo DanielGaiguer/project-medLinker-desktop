@@ -93,14 +93,30 @@ public class PlantaoDAO {
         } 
     }
     
-    public void toggleDeactive(int id){
+    public void toggleDeactive(int idPlantao){
         String sql = "update plantoes set status = ? where id = ?";
+        String sqlCreate = "insert into plantoes_reservados values (?, ?)";
+        SessaoUsuario usuarioLogado = SessaoUsuario.getInstance();
         
         try(Connection conn = Conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setString(1, PlantaoBean.StatusPlantao.preenchido.name());
-            stmt.setInt(2, id);
+            stmt.setInt(2, idPlantao);
+            
+            stmt.executeUpdate();
+            
+        } catch(Exception e){
+            throw new RuntimeException(e);
+        }     
+        
+         try(Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sqlCreate)) {
+             
+             //System.out.println(usuarioLogado.getLoggedUser().getId());
+            
+            stmt.setInt(1, usuarioLogado.getId());
+            stmt.setInt(2, idPlantao);
             
             stmt.executeUpdate();
             

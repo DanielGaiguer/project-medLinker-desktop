@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.PlantaoBean;
 import model.PlantaoDAO;
-import view.Login;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;

@@ -24,6 +24,8 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         this.hospitalDAO = hospital;
         initComponents();
         initTable();
+        esconderColunaID();
+         hospitalTable.getTableHeader().setReorderingAllowed(false);
         initTableClickListener();
         listarHospitais();
     }
@@ -40,6 +42,12 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         
         hospitalTable.setModel(tableModel);
     }
+        private void esconderColunaID() {
+        hospitalTable.getColumnModel().getColumn(0).setMinWidth(0);
+        hospitalTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        hospitalTable.getColumnModel().getColumn(0).setWidth(0);
+    }
+    
     
     private void listarHospitais(){
         tableModel.setRowCount(0);
@@ -141,7 +149,7 @@ public class CadastrarPlantao extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -150,9 +158,8 @@ public class CadastrarPlantao extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(hospitalTable);
         if (hospitalTable.getColumnModel().getColumnCount() > 0) {
-            hospitalTable.getColumnModel().getColumn(0).setMinWidth(0);
+            hospitalTable.getColumnModel().getColumn(0).setResizable(false);
             hospitalTable.getColumnModel().getColumn(0).setPreferredWidth(0);
-            hospitalTable.getColumnModel().getColumn(0).setMaxWidth(0);
             hospitalTable.getColumnModel().getColumn(1).setResizable(false);
         }
 

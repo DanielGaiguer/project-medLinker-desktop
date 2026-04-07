@@ -47,7 +47,6 @@ public class HospitalDAO {
             
             
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Hospital cadastrado com sucesso!");
         }catch(SQLException e){
             e.printStackTrace();
         }
